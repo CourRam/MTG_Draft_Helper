@@ -3,7 +3,7 @@
 Proyecto final de Data Science (UACH). Aplicación web en Streamlit que recomienda **las mejores cartas
 de un sobre** durante un Premier Draft, tomando en cuenta las cartas que ya llevas (tu *pool*).
 
-🔗 **App desplegada:** _(pega aquí la URL de Streamlit Community Cloud)_
+🔗 **App desplegada:** (https://mtgdraftapper-2026.streamlit.app/)
 📓 **Notebook del proyecto:** `Proyecto_Final_Asistente_Draft_MTG.ipynb` (EDA, preprocesamiento, modelos, evaluación)
 
 ## ¿Cómo funciona?
