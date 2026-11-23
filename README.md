@@ -1,10 +1,10 @@
-# 🃏 Asistente de Draft para Magic: The Gathering — Reality Fracture (FRA)
+#  Asistente de Draft para Magic: The Gathering — Reality Fracture (FRA)
 
 Proyecto final de Data Science (UACH). Aplicación web en Streamlit que recomienda **las mejores cartas
 de un sobre** durante un Premier Draft, tomando en cuenta las cartas que ya llevas (tu *pool*).
 
-🔗 **App desplegada:** (https://mtgdraftapper-2026.streamlit.app/)
-📓 **Notebook del proyecto:** `Proyecto_Final_Asistente_Draft_MTG.ipynb` (EDA, preprocesamiento, modelos, evaluación)
+ **App desplegada:** (https://mtgdraftapper-2026.streamlit.app/)
+ **Notebook del proyecto:** `Proyecto_Final_Asistente_Draft_MTG.ipynb` (EDA, preprocesamiento, modelos, evaluación)
 
 ## ¿Cómo funciona?
 1. Pegas los nombres de las cartas del sobre actual (una por línea). Los nombres se reconocen aunque tengan
