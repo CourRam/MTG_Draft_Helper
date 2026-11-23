@@ -6,6 +6,8 @@ mejores 3 cartas con 3 modelos entrenados en el notebook (SVM lineal, Regresion 
 XGBoost), el usuario marca la carta que tomo, el pool se acumula y se repite hasta completar
 el draft (3 sobres x 14 picks = 42 picks; 45 si los sobres traen 15 cartas).
 
+Autor: Joseph Daniel Ramirez Torres (matrícula 374352) — Data Science, UACH.
+
 Ejecutar localmente:   streamlit run app.py
 """
 
@@ -26,9 +28,6 @@ COLORES_NOMBRE = {"W": "Blanco", "U": "Azul", "B": "Negro", "R": "Rojo", "G": "V
 st.set_page_config(page_title="Asistente de Draft MTG", page_icon="🃏", layout="wide")
 
 
-# ----------------------------------------------------------------------------------------
-# Carga de artefactos (una sola vez; st.cache_resource los guarda en memoria entre ejecuciones)
-# ----------------------------------------------------------------------------------------
 @st.cache_resource(show_spinner="Cargando modelos...")
 def cargar():
     catalogo = joblib.load(RUTA / "catalogo.joblib")
@@ -44,9 +43,7 @@ nombres_validos = list(catalogo["nombres"])
 idx_carta = catalogo["indice"]
 
 
-# ----------------------------------------------------------------------------------------
-# Estado de la sesion
-# ----------------------------------------------------------------------------------------
+
 def reiniciar():
     st.session_state.pool = {}            # {carta: copias}
     st.session_state.historial = []       # lista de dicts: pick, pack, elegida
@@ -75,6 +72,9 @@ with st.sidebar:
     st.dataframe(tabla.style.format("{:.3f}"), width="stretch")
     st.caption("Top-k: % de picks en que la carta elegida por jugadores fuertes quedó entre las k "
                "primeras recomendaciones.")
+    st.divider()
+    st.caption("**Autor:** Joseph Daniel Ramirez Torres  \n**Matrícula:** 374352  \n"
+               "Proyecto Final — Data Science · UACH")
 
 TOTAL = 3 * cartas_por_sobre
 n_picks = len(st.session_state.historial)
@@ -82,9 +82,7 @@ terminado = n_picks >= TOTAL
 sobre = min(n_picks // cartas_por_sobre, 2)          # 0, 1, 2 (formato del entrenamiento)
 pick_en_sobre = n_picks % cartas_por_sobre           # 0..13
 
-# ----------------------------------------------------------------------------------------
-# Encabezado
-# ----------------------------------------------------------------------------------------
+
 st.title("🃏 Asistente de Draft — Reality Fracture (FRA)")
 st.caption("Pega las cartas de tu pack y recibe las mejores opciones según tu pool actual. "
            "Los modelos imitan lo que eligen jugadores con win rate ≥ 58 %; "
@@ -96,9 +94,7 @@ st.progress(min(n_picks / TOTAL, 1.0),
 
 col_izq, col_der = st.columns([3, 2], gap="large")
 
-# ----------------------------------------------------------------------------------------
-# Columna izquierda: entrada del pack, recomendaciones y eleccion
-# ----------------------------------------------------------------------------------------
+
 with col_izq:
     if terminado:
         st.success("🎉 ¡Draft completo! Revisa tu pool a la derecha y descárgalo para armar tu mazo.")
@@ -226,3 +222,7 @@ with col_der:
         with st.expander("Historial de picks"):
             st.dataframe(pd.DataFrame(st.session_state.historial)[
                 ["pick", "sobre", "carta", "recomendada"]], hide_index=True, width="stretch")
+
+st.divider()
+st.caption("Proyecto Final de Data Science · Joseph Daniel Ramirez Torres (374352) · UACH · "
+           "Datos: 17Lands y Scryfall.")
